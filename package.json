@@ -1,0 +1,17 @@
+{
+  "name": "ZTCars",
+  "version": "1.0.0",
+  "description": "SPA for ST",
+  "license": "UNLICENSED",
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KurobaneYan/ZTCars.git"
+  },
+  "dependencies": {
+    "angular": "^1.6.4",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.5",
+    "mongoose-auto-increment": "^5.0.1"
+  }
+}
