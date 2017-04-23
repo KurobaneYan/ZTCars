@@ -17,14 +17,15 @@ let carSchema = new mongoose.Schema({
 
 carSchema.pre('save', function(next) {
     let doc = this;
-    Counter.findByIdAndUpdate({_id: 'carId'}, {$inc: { seq: 1 }}, {upset:true}, function(error, counter)   {
-        if(error) {
-            return next(error);
-        }
-        console.log(counter);
-        doc.carId = counter.seq;
-        next();
-    });    
+    if (!doc.carId) {
+        Counter.findByIdAndUpdate({_id: 'carId'}, {$inc: { seq: 1 }}, {upset:true}, function(error, counter)   {
+            if(error) {
+                return next(error);
+            }
+            doc.carId = counter.seq;
+            next();
+        });
+    }
 });
 
 let Car = mongoose.model('Car', carSchema);

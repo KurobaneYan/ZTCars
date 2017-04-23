@@ -8,6 +8,7 @@ router.route('/cars')
     .post(carController.createCar);
 
 router.route('/cars/:carId')
-    .get(carController.getCarById);
+    .get(carController.getCarById)
+    .put(carController.updateCarById);
 
 module.exports = router;
