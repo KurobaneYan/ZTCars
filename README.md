@@ -41,6 +41,7 @@ This will create 106 car records in database.
 | /api/cars | POST | Create a car|
 | /api/cars/:carId | GET | Get a single car |
 | /api/cars/:carId | PUT | Update a car with a new info |
+| /api/cars/:carId | DELETE | Delete a car |
 
 ### Dependencies
 

@@ -30,6 +30,10 @@ exports.updateCarById = function(req, res) {
     });
 };
 
+exports.deleteCarById = function(req, res) {
+    Car.remove({carId: req.params.carId}, returnCar(req, res)); 
+};
+
 function createCarFromRequest(req) {
     let car = new Car();
     fillCarFieldsFromRequest(car, req);    

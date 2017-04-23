@@ -9,6 +9,7 @@ router.route('/cars')
 
 router.route('/cars/:carId')
     .get(carController.getCarById)
-    .put(carController.updateCarById);
+    .put(carController.updateCarById)
+    .delete(carController.deleteCarById);
 
 module.exports = router;
