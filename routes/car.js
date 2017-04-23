@@ -12,4 +12,7 @@ router.route('/cars/:carId')
     .put(carController.updateCarById)
     .delete(carController.deleteCarById);
 
+router.route('/cars/mostPopular/:amount')
+    .get(carController.getMostPopular);
+
 module.exports = router;

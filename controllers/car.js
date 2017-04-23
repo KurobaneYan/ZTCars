@@ -34,6 +34,11 @@ exports.deleteCarById = function(req, res) {
     Car.remove({carId: req.params.carId}, returnCar(req, res)); 
 };
 
+exports.getMostPopular = function(req, res) {
+    let limit = Number(req.params.amount);
+    Car.find({}).sort({views: -1}).limit(limit).exec(returnCar(req, res));
+};
+
 function createCarFromRequest(req) {
     let car = new Car();
     fillCarFieldsFromRequest(car, req);    
