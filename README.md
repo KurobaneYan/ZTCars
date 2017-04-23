@@ -36,6 +36,7 @@ This will create 106 car records in database.
 ### REST
 
 | Route | HTTP Verb | Description |
+| ----- | ----- | ----- |
 | /api/cars | GET | Get all the cars |
 | /api/cars | POST | Create a car|
 
