@@ -38,6 +38,7 @@ This will create 106 car records in database.
 | Route | HTTP Verb | Description |
 | /api/cars | GET | Get all the cars |
 | /api/cars | POST | Create a car|
+| /api/cars/:carId | GET | Get a single Car |
 
 ### Dependencies
 

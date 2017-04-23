@@ -3,9 +3,9 @@ let mongoose = require('mongoose');
 let Car = mongoose.model('Car');
 
 exports.getAllCars = function(req, res) {
-    Car.find({}).exec(function(err, cars) {
-        if (err) {
-            res.json({"error": err});
+    Car.find({}).exec(function(error, cars) {
+        if (error) {
+            res.json({error: error});
         }
         res.json(cars);
     });
@@ -25,9 +25,9 @@ exports.createCar = function(req, res) {
     car.automaticTranmsission = req.body.automaticTransmission;
     car.photos = req.body.photos;
 
-    car.save(function(err) {
-        if (err) {
-            res.json({"error": err});
+    car.save(function(error) {
+        if (error) {
+            res.json({error: error});
         }
 
         res.json(car);
@@ -35,5 +35,11 @@ exports.createCar = function(req, res) {
 };
 
 exports.getCarById = function(req, res) {
-    Car.find({carId: 1})
+    let car = Car.findOne({carId: req.params.carId}, function(error, car) {
+        if (error) {
+            res.json({error: error});
+        }
+
+        res.json(car);
+    });
 };
