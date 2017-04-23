@@ -1,0 +1,14 @@
+{
+  "name": "ztcars",
+  "description": "SPA for ST",
+  "main": "",
+  "authors": [
+    "Kurobane Yan <yan.kurobane.@gmail.com>"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/KurobaneYan/ZTCars",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.6.4"
+  }
+}

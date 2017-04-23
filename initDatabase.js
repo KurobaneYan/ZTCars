@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let Counter = require('./models/counter');
 let Car = require('./models/car');
 let fs = require('fs');
 let imgs = JSON.parse(fs.readFileSync('img.json', 'utf-8'));
@@ -21,7 +22,9 @@ let carsData = {
 
 let fuel = ['Gasoline', 'Disel'];
 
-let cars = [];
+let counter = Counter({_id: 'carId', seq: 0});
+console.log(counter);
+Counter.update({_id: 'carId'}, counter, {upsert: true, setDefaultsOnInsert: true}, function(err){});
 
 for (let make in carsData) {
     let models = carsData[make];
@@ -40,17 +43,18 @@ for (let make in carsData) {
             automaticTransmission: tmpBool,
             photos: imgs
         });
-        cars.push(tempCar);
+        tempCar.save(function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
     }
 }
 
-console.log(cars);
-
-Car.insertMany(cars, function(error, docs) {});
-
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
+process.exit()

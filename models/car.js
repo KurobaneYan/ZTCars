@@ -17,10 +17,11 @@ let carSchema = new mongoose.Schema({
 
 carSchema.pre('save', function(next) {
     let doc = this;
-    Counter.findByIdAndUpdate({_id: 'carId'}, {$inc: { seq: 1 }}, function(error, counter)   {
+    Counter.findByIdAndUpdate({_id: 'carId'}, {$inc: { seq: 1 }}, {upset:true}, function(error, counter)   {
         if(error) {
             return next(error);
         }
+        console.log(counter);
         doc.carId = counter.seq;
         next();
     });    
