@@ -11,6 +11,7 @@ let routes = require('./routes/car');
 
 let app = express();
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.databaseUrl)
 let db = mongoose.connection;
 
@@ -19,8 +20,7 @@ db.once('open', function() {
     console.log('Mongoose connected to ' + config.databaseUrl);
 });
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -1,73 +1,51 @@
-let mongoose = require('mongoose');
-
-let Car = mongoose.model('Car');
+let db = require('../db/car');
+let helper = require('../helpers/car');
 
 exports.getAllCars = function(req, res) {
-    Car.find({}).exec(returnCar(req, res)); 
+    let cars = db.getAll();
+    showPromise(req, res, cars);
 };
 
 exports.createCar = function(req, res) {
-    let car = createCarFromRequest(req);
-    Car.create(car, returnCar(req, res));
+    let carModel = helper.createCarFromReq(req);
+    let car = db.save(carModel);
+    showPromise(req, res, car);
 };
 
 exports.getCarById = function(req, res) {
-    Car.findOne({carId: req.params.carId})
-        .exec(returnCar(req, res));
+    let car = db.getById(req.params.carId);
+    showPromise(req, res, car);
 };
 
 exports.updateCarById = function(req, res) {
-    Car.findOne({carId: req.params.carId}, (error, car) => {
-        returnError(error, res);
-
-        fillCarFieldsFromRequest(car, req);
-        car.carId = req.params.carId;
-        car.save((err) => {
-            returnError(err, res);
-        });
-
-        res.json(car);
-    });
+    let carId = req.params.carId;
+    let carFields = helper.getCarFromReq(req);
+    let car = db.updateCarById(carId, car);
+    showPromise(req, res, car);
 };
 
 exports.deleteCarById = function(req, res) {
-    Car.remove({carId: req.params.carId}, returnCar(req, res)); 
+    let result = db.deleteCarById(req.params.carId);
+    showPromise(req, res, result);
 };
 
 exports.getMostPopular = function(req, res) {
-    let limit = Number(req.params.amount);
-    Car.find({}).sort({views: -1}).limit(limit).exec(returnCar(req, res));
+    let amount = Number(req.params.amount);
+    let cars = db.getMostPopular(amount);
+    showPromise(req, res, cars);
 };
 
-function createCarFromRequest(req) {
-    let car = new Car();
-    fillCarFieldsFromRequest(car, req);    
-    return car;
+function showCar(req, res) {
+    return car => res.json(car);
 }
 
-function fillCarFieldsFromRequest(car, req) {
-    car.views = req.body.views;
-    car.year = req.body.year;
-    car.price = req.body.price;
-    car.kilometrage = req.body.kilometrage;
-    car.manufacturer = req.body.manufacturer;
-    car.model = req.body.model;
-    car.description = req.body.description;
-    car.fuelType = req.body.fuelType;
-    car.automaticTranmsission = req.body.automaticTransmission;
-    car.photos = req.body.photos;
+function handleError(req, res) {
+    return error => res.status(500).json({error: error});
 }
 
-function returnCar(req, res) {
-    return (error, car) => {
-        returnError(error, res);
-
-        res.json(car);
-    };
+function showPromise(req, res, promise) {
+    promise
+        .then(showCar(req, res))
+        .catch(handleError(req, res));
 }
 
-function returnError(error, res) {
-    if (error) {
-        res.json({error: error});
-    }
-}
