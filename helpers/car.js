@@ -16,13 +16,13 @@ function copyCarFields(obj, car) {
 
 exports.copyCarFields = copyCarFields;
 
-exports.getCarFromReq = (req) => {
+exports.getCarFromReq = req => {
     let car = {};
     copyCarFields(req.body, car);
     return car;
 }
 
-exports.createCarFromReq = (req) => {
+exports.createCarFromReq = req => {
     let car = new Car();
     copyCarFields(req.body, car);
     return car;
