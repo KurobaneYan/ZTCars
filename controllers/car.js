@@ -47,6 +47,22 @@ exports.deleteCarById = function(req, res) {
     }
 };
 
+exports.getFilteredQuery = function(req, res) {
+    let result = db.getFilteredQuery(req.body);
+    showPromise(req, res, result);
+};
+
+exports.getManufacturers = function(req, res) {
+    let manufacturers = db.getManufacturers();
+    showPromise(req, res, manufacturers);
+};
+
+exports.getModels = function(req, res) {
+    let manufacturer = req.params.manufacturer;
+    let models = db.getModels(manufacturer);
+    showPromise(req, res, models);
+};
+
 exports.getMostPopular = function(req, res) {
     let amount = parseInt(req.params.amount, 10);
     let cars = db.getMostPopular(amount);
