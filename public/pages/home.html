@@ -1,6 +1,32 @@
-<div class="text-center">
-    <h1>Home Page</h1>	
-    <p>{{ message }}</p>
-    <p>cars:</p>
-    <p ng-repeat="car in cars">{{ car }}</p>
+<div class="text-center container">
+    <div class="form-inline">
+        <input type="text" class="form-control" ng-model="search" placeholder="Lancer">
+        <button class="btn btn-default" ng-click="go('/search')">Search</button>
+    </div>
+    <table class="table table-bordered">
+        <tr ng-repeat="fiveCars in cars">
+            <td ng-repeat="car in fiveCars">
+                <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
+                    <img class="img-responsive img-rounded" ng-src="{{ car.photos[0] }}">
+                    <p>
+                        {{ car.manufacturer }}
+                        {{ car.model }}
+                    </p>
+                    <p>
+                        kilometrage:
+                        {{ car.kilometrage * 1000 }} km
+                    </p>
+                    <p>
+                        {{ car.price }} USD
+                    </p>
+                    <p>
+                        {{ car.price * 1.89 }} BYN
+                    </p>
+                    <p>
+                        {{ car.price * 0.9 }} EUR
+                    </p>
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>

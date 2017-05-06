@@ -56,5 +56,21 @@ exports.getFilteredQuery = (filters) => {
     return cars;
 };
 
+exports.find = s => 
+{
+    let parsed = parseInt(s, 10);
+    let number = parsed ? parsed : 0;
+    let request = {
+        $or: [
+            {manufacturer: s},
+            {model: s},
+            {price: number},
+            {year: number},
+            {kilometrage: number},
+            {fuelType: s}
+        ]};
+    return Car.find(request);
+}
+
 exports.addPagination = (result, page, limit) => 
     result.skip(limit * (page - 1)).limit(limit);

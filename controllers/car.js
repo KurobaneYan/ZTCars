@@ -71,6 +71,12 @@ exports.getMostPopular = function(req, res) {
     show(req, res, cars);
 };
 
+exports.find = function(req, res) {
+    let result = db.find(req.params.string);
+    addPagination(result, req);
+    show(req, res, result);
+};
+
 function showCar(req, res) {
     return car => res.json(car);
 }

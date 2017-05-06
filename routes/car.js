@@ -3,6 +3,9 @@ let carController = require('../controllers/car');
 
 let router = express.Router();
 
+router.route('/find/:string')
+    .get(carController.find);
+
 router.route('/cars')
     .get(carController.getAllCars)
     .post(carController.createCar);
