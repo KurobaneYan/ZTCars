@@ -26,10 +26,12 @@ This will create 106 car records in database.
 
 ## REST
 
+### Available requests
+
 | Route | HTTP Verb | Description |
 | ----- | ----- | ----- |
 | /api/cars | GET | Get all the cars |
-| /api/cars | POST | Create a car|
+| /api/cars | POST | Create a car |
 | /api/cars/:carId | GET | Get a single car |
 | /api/cars/:carId | PUT | Update a car with a new info |
 | /api/cars/:carId | DELETE | Delete a car |
@@ -37,6 +39,15 @@ This will create 106 car records in database.
 | /api/cars/mostPopular/:amount | GET | Get the most popular cars |
 | /api/manufacturers | GET | Get list on a manufacturers |
 | /api/models/:manufacturer | GET | Get all car models for a manufacturer |
+
+### Pagination
+
+| Route | HTTP Verb | Description |
+| ----- | ----- | ----- |
+| /api/cars?page=[page]&limit=[limit] | GET | Get all the cars with pagination |
+| /api/cars/filter?page=[page]&limit=[limit] | POST | Get filtered list of a cars with pagination |
+
+### Examples
 
 When creating or updating car send a car fields in body, using JSON format:
 

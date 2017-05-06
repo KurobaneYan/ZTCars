@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 let Car = mongoose.model('Car');
 
-exports.getAll = () => Car.find().exec();
+exports.getAll = () => Car.find();
 
 exports.save = car => car.save();
 
@@ -55,3 +55,6 @@ exports.getFilteredQuery = (filters) => {
     }
     return cars;
 };
+
+exports.addPagination = (result, page, limit) => 
+    result.skip(limit * (page - 1)).limit(limit);
