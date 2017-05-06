@@ -39,6 +39,7 @@ This will create 106 car records in database.
 | /api/cars/mostPopular/:amount | GET | Get the most popular cars |
 | /api/manufacturers | GET | Get list on a manufacturers |
 | /api/models/:manufacturer | GET | Get all car models for a manufacturer |
+| /api/find/:string | GET | Find a string in the cars fields |
 
 ### Pagination
 
@@ -46,6 +47,7 @@ This will create 106 car records in database.
 | ----- | ----- | ----- |
 | /api/cars?page=[page]&limit=[limit] | GET | Get all the cars with pagination |
 | /api/cars/filter?page=[page]&limit=[limit] | POST | Get filtered list of a cars with pagination |
+| /api/find/:string?page=[page]&limit[limit] | GET | Find a string in the cars fields with pagination |
 
 ### Examples
 
