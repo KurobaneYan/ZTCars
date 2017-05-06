@@ -1,31 +1,15 @@
 # ZTCars
 
-### Description
-
 It's a simple single page application with RESTful Web services. Backend: Node + Express + Mongodb. Frontend: Angular.
 
-### Installation
+## Installation
+
+### Install all dependencies
 
 ```shell
-$ npm install
-$ bower install
+$ bower install && npm install
 ```
-
-### Run it
-
-1. Install the dependencies 
-2. Start the server:
-    ```shell
-    $ npm start
-    ```
-    or with debug:
-    ```shell
-    $ npm run debug
-    ```
-3. Then check address: `localhost:1337`
-
 ### Initialize Database
-
 
 ```
 $ node initDatabase.js
@@ -33,7 +17,14 @@ $ node initDatabase.js
 
 This will create 106 car records in database.
 
-### REST
+## Run it
+
+1. Install the dependencies 
+2. Run Mongo daemon with `mongod`
+2. Start the server with `npm start`
+3. Then check address [localhost:1337](http://localhost:1337)
+
+## REST
 
 | Route | HTTP Verb | Description |
 | ----- | ----- | ----- |
@@ -69,6 +60,7 @@ When creating or updating car send a car fields in body, using JSON format:
 ```
 
 A filter object example:
+
 ```JSON
 {
     "manufacturer": "Mitsubishi",
@@ -83,7 +75,7 @@ A filter object example:
 }
 ```
 
-### Dependencies
+## Dependencies
 
 | Name | version |
 | ------ | ------ |
@@ -93,8 +85,8 @@ A filter object example:
 | Node js| 6.10.2 |
 | Mongoose | 4.9.5 |
 | Body-parser | 1.17.1 |
-| Debug | 2.6.3 |
 | Morgan | 1.8.1|
 | Serve-favicon | 2.4.2 |
 | Nodemon | 1.11.0 |
+| Webpack | 2.5.0 |
 

@@ -31,3 +31,6 @@ npm-debug.log
 
 # Bower libs
 public/libs
+
+# Webpack builds
+public/dist/*.js
