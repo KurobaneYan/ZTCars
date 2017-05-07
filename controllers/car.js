@@ -18,7 +18,13 @@ exports.getCarById = function(req, res) {
     let carId = parseInt(req.params.carId, 10);
     let isValidCarId = validation.isPositiveInt(carId);
     if (isValidCarId) {
-        let car = db.getById(carId);
+        let carFields = {};
+        let car = db.getById(carId)
+            .then(c => {
+                helper.copyCarFields(c, carFields);
+                carFields.views += 1;
+                return db.updateCarById(carId, carFields);
+            });
         show(req, res, car);
     } else {
         res.status(400).json({error: 'invalid carId'});
@@ -30,7 +36,7 @@ exports.updateCarById = function(req, res) {
     let isValidCarId = validation.isPositiveInt(carId);
     if (isValidCarId) {
         let carFields = helper.getCarFromReq(req);
-        let car = db.updateCarById(carId, car);
+        let car = db.updateCarById(carId, carFields);
         show(req, res, car);
     } else {
         res.status(400).json({error: 'invalid carId'});

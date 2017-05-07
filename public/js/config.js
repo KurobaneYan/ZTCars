@@ -26,7 +26,7 @@ module.exports = function($routeProvider, $locationProvider, $httpProvider) {
 	    templateUrl : 'pages/create.html',
 	    controller  : 'mainController'
 	})
-	.when('/:carId', {
+	.when('/car/:carId', {
 	    templateUrl : 'pages/car.html',
 	    controller  : 'carController'
 	})

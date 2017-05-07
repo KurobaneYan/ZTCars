@@ -15,4 +15,12 @@ module.exports = function($http) {
             dataType: 'json'
         });
     };
+
+    this.getCarById = function(carId) {
+        return $http({
+            method: 'GET',
+            url: baseUrl + '/cars/' + carId,
+            dataType: 'json'
+        });
+    };
 };
