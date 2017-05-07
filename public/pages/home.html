@@ -8,24 +8,26 @@
             <td ng-repeat="car in fiveCars">
                 <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
                     <img class="img-responsive img-rounded" ng-src="{{ car.photos[0] }}">
-                    <p>
+                </a>
+                <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
+                    <h3>
                         {{ car.manufacturer }}
                         {{ car.model }}
-                    </p>
-                    <p>
-                        kilometrage:
-                        {{ car.kilometrage * 1000 }} km
-                    </p>
-                    <p>
-                        {{ car.price }} USD
-                    </p>
-                    <p>
-                        {{ car.price * 1.89 }} BYN
-                    </p>
-                    <p>
-                        {{ car.price * 0.9 }} EUR
-                    </p>
+                    </h3>
                 </a>
+                <p>
+                    kilometrage:
+                    {{ car.kilometrage * 1000 }} km
+                </p>
+                <p>
+                    {{ car.price }} USD
+                </p>
+                <p>
+                    {{ car.price * 1.89 }} BYN
+                </p>
+                <p>
+                    {{ car.price * 0.9 }} EUR
+                </p>
             </td>
         </tr>
     </table>
