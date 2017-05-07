@@ -54,12 +54,6 @@ exports.deleteCarById = function(req, res) {
     }
 };
 
-exports.getFilteredQuery = function(req, res) {
-    let result = db.getFilteredQuery(req.body);
-    addPagination(result, req);
-    show(req, res, result);
-};
-
 exports.getManufacturers = function(req, res) {
     let manufacturers = db.getManufacturers();
     show(req, res, manufacturers);
@@ -77,8 +71,8 @@ exports.getMostPopular = function(req, res) {
     show(req, res, cars);
 };
 
-exports.find = function(req, res) {
-    let result = db.find(req.params.string);
+exports.search = function(req, res) {
+    let result = db.search(req.params.string, req.body);
     addPagination(result, req);
     show(req, res, result);
 };

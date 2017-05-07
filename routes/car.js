@@ -3,15 +3,16 @@ let carController = require('../controllers/car');
 
 let router = express.Router();
 
-router.route('/find/:string')
-    .get(carController.find);
+router.route('/search')
+    .post(carController.search);
+
+router.route('/search/:string')
+    .get(carController.search)
+    .post(carController.search);
 
 router.route('/cars')
     .get(carController.getAllCars)
     .post(carController.createCar);
-
-router.route('/cars/filter')
-    .post(carController.getFilteredQuery);
 
 router.route('/cars/mostPopular/:amount')
     .get(carController.getMostPopular);

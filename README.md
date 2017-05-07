@@ -35,11 +35,12 @@ This will create 106 car records in database.
 | /api/cars/:carId | GET | Get a single car |
 | /api/cars/:carId | PUT | Update a car with a new info |
 | /api/cars/:carId | DELETE | Delete a car |
-| /api/cars/filter | POST | Get filtered list of a cars |
 | /api/cars/mostPopular/:amount | GET | Get the most popular cars |
 | /api/manufacturers | GET | Get list on a manufacturers |
 | /api/models/:manufacturer | GET | Get all car models for a manufacturer |
-| /api/find/:string | GET | Find a string in the cars fields |
+| /api/search/| POST | Get filtered car query, require filter object |
+| /api/search/:string | GET | Search a string in the cars fields |
+| /api/search/:string | POST | Search a string in the cars fields, also can use filter object |
 
 ### Pagination
 
@@ -47,7 +48,7 @@ This will create 106 car records in database.
 | ----- | ----- | ----- |
 | /api/cars?page=[page]&limit=[limit] | GET | Get all the cars with pagination |
 | /api/cars/filter?page=[page]&limit=[limit] | POST | Get filtered list of a cars with pagination |
-| /api/find/:string?page=[page]&limit[limit] | GET | Find a string in the cars fields with pagination |
+| /api/search/:string?page=[page]&limit[limit] | GET | Find a string in the cars fields with pagination |
 
 ### Examples
 

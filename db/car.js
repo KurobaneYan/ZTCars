@@ -24,8 +24,25 @@ exports.getModels = manufacturer => {
     return Car.find({manufacturer: manufacturer}).distinct('model');
 };
 
-exports.getFilteredQuery = (filters) => {
-    let cars = Car.find();
+exports.search = (q, filters) => 
+{
+    let cars;
+    if (typeof(q) != 'undefined') {
+        let parsed = parseInt(q, 10);
+        let number = parsed ? parsed : 0;
+        let request = {
+            $or: [
+                {manufacturer: q},
+                {model: q},
+                {price: number},
+                {year: number},
+                {kilometrage: number},
+                {fuelType: q}
+            ]};
+        cars = Car.find(request);
+    } else {
+        cars = Car.find({});
+    }
     if ('manufacturer' in filters) {
         cars.where('manufacturer').equals(filters.manufacturer);
     }
@@ -53,23 +70,8 @@ exports.getFilteredQuery = (filters) => {
     if ('fuelType' in filters) {
         cars.where('fuelType').equals(filters.fuelType);
     }
-    return cars;
-};
-
-exports.find = s => 
-{
-    let parsed = parseInt(s, 10);
-    let number = parsed ? parsed : 0;
-    let request = {
-        $or: [
-            {manufacturer: s},
-            {model: s},
-            {price: number},
-            {year: number},
-            {kilometrage: number},
-            {fuelType: s}
-        ]};
-    return Car.find(request);
+    
+    return cars.sort({views: -1});
 }
 
 exports.addPagination = (result, page, limit) => 
