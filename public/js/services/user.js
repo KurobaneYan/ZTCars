@@ -1,5 +1,5 @@
 module.exports = function($http) {
-    let baseUrl = 'http://localhost:1337/api'
+    var baseUrl = 'http://localhost:1337/api'
     this.getAllCars = function() {
         return $http.get(baseUrl + '/cars');
     };

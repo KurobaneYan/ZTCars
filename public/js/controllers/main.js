@@ -1,7 +1,7 @@
 module.exports = function($scope, $location, userService) {
     $scope.cars = [];
     userService.getMostPopularCars().then(function(resp) {
-        let cars = resp.data;
+        var cars = resp.data;
         while(cars.length) {
             $scope.cars.push(cars.splice(0, 5));
         }

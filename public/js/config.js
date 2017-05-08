@@ -7,31 +7,22 @@ module.exports = function($routeProvider, $locationProvider, $httpProvider) {
     
     $routeProvider
 	.when('/', {
-	    templateUrl : 'pages/home.html',
+	    templateUrl : 'partials/home.html',
 	    controller  : 'mainController'
 	})
 	.when('/search', {
-	    templateUrl : 'pages/search.html',
+	    templateUrl : 'partials/search.html',
 	    controller  : 'searchController'
 	})
 	.when('/search/:query', {
-	    templateUrl : 'pages/search.html',
+	    templateUrl : 'partials/search.html',
 	    controller  : 'searchController'
 	})
-	.when('/admin', {
-	    templateUrl : 'pages/admin.html',
-	    controller  : 'adminController'
-	})
-	.when('/edit/:carId', {
-	    templateUrl : 'pages/edit.html',
-	    controller  : 'editController'
-	})
-	.when('/create', {
-	    templateUrl : 'pages/create.html',
-	    controller  : 'mainController'
-	})
 	.when('/car/:carId', {
-	    templateUrl : 'pages/car.html',
+	    templateUrl : 'partials/car.html',
 	    controller  : 'carController'
 	})
+        .otherwise({
+            templateUrl:'partials/404.html'
+        });
 };

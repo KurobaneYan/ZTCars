@@ -4,6 +4,5 @@ module.exports = function($scope, $routeParams, userService) {
         $scope.car = resp.data;
     }, function(error) {
         $scope.error = error;
-        console.log(error);
     });
 };

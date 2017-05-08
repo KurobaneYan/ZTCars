@@ -1,7 +1,6 @@
 var config = require('./config');
 
 var userService = require('./services/user');
-var adminService = require('./services/admin');
 
 var mainController = require('./controllers/main');
 var carController = require('./controllers/car');

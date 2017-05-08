@@ -1,6 +1,12 @@
-<div class="text-center" ng-show="error">
-    <h1>Error.</h1>
+<div class="text-center alert alert-danger" ng-show="error">
+    <h1>Car not found</h1>
     <p>Can't find a car with this Id.</p>
+    <p>
+        <a ng-href="http://localhost:1337/">Return to main page</a>
+    </p>
+    <p>
+        {{ error }}
+    </p>
 </div>
 <div class="text-center container" ng-show="car">
     <h1>{{ car.manufacturer }} {{ car.model }}</h1>	
