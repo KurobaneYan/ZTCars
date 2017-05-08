@@ -1,19 +1,30 @@
-module.exports = function($scope, $rootScope, $location, $routeParams, userService) {
+module.exports = function($scope, $rootScope, $location, $routeParams, service) {
     var defaultManufacturer = 'select manufacturer';
     var defaultModel = 'select model';
     var defaultYear = 'select year';
     var defaultFuelType = 'select fuel type';
     var defaultTransmission = 'select transmission';
     var newFilter = $location.search();
-    var manufacturers = [{manufacturer: defaultManufacturer, models: [defaultModel]}];
+    var manufacturers = 
+        [{manufacturer: defaultManufacturer, models: [defaultModel]}];
+    var minYear = 1996;
+    var currentYear = new Date().getFullYear();
+
+    $scope.years = [defaultYear];
+    while(currentYear >= minYear) {
+        $scope.years.push(currentYear);
+        currentYear -= 1;
+    }
+    $scope.yearsMin = $scope.years.slice();
+    $scope.yearsMax = $scope.years.slice();
 
     $scope.noCars = false;
     $scope.transmissions = [defaultTransmission, 'true', 'false'];
     $scope.fuelTypes = [defaultFuelType, 'Disel', 'Gasoline'];
-    
     $scope.filter = {};
     $scope.filter.manufacturer = newFilter.manufacturer;
     $scope.filter.model = newFilter.model;
+
     if (typeof(newFilter.priceMin) !== 'undefined') {
         $scope.filter.priceMin = parseInt(newFilter.priceMin, 10);
     }
@@ -51,30 +62,21 @@ module.exports = function($scope, $rootScope, $location, $routeParams, userServi
         $scope.transmission = defaultTransmission;
     }
 
-
     $rootScope.$broadcast('setSearchQuery', $location.path().substring(8));
 
-    userService.search($routeParams.query, JSON.stringify($scope.filter)).then(function(res) {
-        $scope.cars = res.data;
-        if ($scope.cars.length === 0) {
-            $scope.noCars = true;
-        }
-    });
+    service.search($routeParams.query, JSON.stringify($scope.filter))
+        .then(function(res) {
+            $scope.cars = res.data;
+            if ($scope.cars.length === 0) {
+                $scope.noCars = true;
+            }
+        });
     
-    var minYear = 1996;
-    var currentYear = new Date().getFullYear();
-    $scope.years = [defaultYear];
-    while(currentYear >= minYear) {
-        $scope.years.push(currentYear);
-        currentYear -= 1;
-    }
-    $scope.yearsMin = $scope.years.slice();
-    $scope.yearsMax = $scope.years.slice();
 
-    userService.getManufacturers().then(function(res) {
+    service.getManufacturers().then(function(res) {
         $scope.carsTree = manufacturers.concat(res.data.map(function(manufacturer) {
             var newManufacturer = {manufacturer: manufacturer};
-            userService.getModels(manufacturer)
+            service.getModels(manufacturer)
                 .then(function(res) {
                     newManufacturer.models = [defaultModel].concat(res.data);
                 });
@@ -113,7 +115,6 @@ module.exports = function($scope, $rootScope, $location, $routeParams, userServi
     $scope.onYearMaxChange = function() {
         var index = $scope.years.indexOf($scope.yearMax);
         if (index !== 0) {
-
             $scope.yearsMin = [defaultYear].concat($scope.years.slice(index, $scope.years.length));
             if ($scope.yearMax < $scope.yearMin) {
                 $scope.yearMin = $scope.yearMax;
@@ -145,13 +146,11 @@ module.exports = function($scope, $rootScope, $location, $routeParams, userServi
             } else {
                 delete $scope.filter.yearMax;
             }
-
             if ($scope.fuelType !== defaultFuelType) {
                 $scope.filter.fuelType = $scope.fuelType;
             } else {
                 delete $scope.filter.fuelType;
             }
-
             if ($scope.transmission !== defaultTransmission) {
                 $scope.filter.automaticTransmission = $scope.transmission;
             } else {

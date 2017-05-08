@@ -1,6 +1,6 @@
-module.exports = function($scope, $location, userService) {
+module.exports = function($scope, $location, service) {
     $scope.cars = [];
-    userService.getMostPopularCars().then(function(resp) {
+    service.getMostPopularCars().then(function(resp) {
         var cars = resp.data;
         while(cars.length) {
             $scope.cars.push(cars.splice(0, 5));
