@@ -70,6 +70,9 @@ exports.search = (q, filters) =>
     if ('fuelType' in filters) {
         cars.where('fuelType').equals(filters.fuelType);
     }
+    if ('automaticTransmission' in filters) {
+        cars.where('automaticTransmission').equals(filters.automaticTransmission);
+    }
     
     return cars.sort({views: -1});
 }

@@ -5,6 +5,7 @@ var adminService = require('./services/admin');
 
 var mainController = require('./controllers/main');
 var carController = require('./controllers/car');
+var searchController = require('./controllers/search');
 
 var app = angular.module('ZTCars', ['ngRoute']);
 app.config(config);
@@ -12,10 +13,6 @@ app.config(config);
 app.service('userService', userService); 
 
 app.controller('mainController', mainController);
-
 app.controller('carController', carController);
-
-app.controller('searchController', function($scope) {
-    $scope.message = 'Look! I am an search page.';
-});
+app.controller('searchController', searchController);
 

@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <title>ZTCars</title>
     <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="dist/vendor.js"></script>
     <script src="dist/app.js"></script>
 </head>
 <body ng-controller="mainController">
 <header>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">ZTCars</a>
             </div>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Home</a></li>
-                <li><a href="#search">Search</a></li>
-                <li><a href="#admin">Admin</a></li>
-            </ul>
+            <div class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="searchQuery">
+                </div>
+                <button class="btn btn-default" ng-click="go('/search')">Search</button>
+            </div>
         </div>
     </nav>
 </header>
 
-  <div id="main">
-    <div ng-view>
-    </div>
-  </div>
+<div ng-view>
+</div>
 </body>
 
 </html>
