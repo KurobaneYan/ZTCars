@@ -7,10 +7,13 @@ module.exports = function($scope, $location, userService) {
         }
     });
     $scope.go = function(path) {
-        if ($scope.search) {
-            $location.path(path + '/' + $scope.search);
+        if ($scope.searchQuery) {
+            $location.path(path + '/' + $scope.searchQuery);
         } else {
             $location.path(path);
         }
     };
+    $scope.$on('setSearchQuery', function(event, newSearchQuery) {
+        $scope.searchQuery = newSearchQuery;
+    });
 };

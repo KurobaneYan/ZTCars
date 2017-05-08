@@ -14,6 +14,10 @@ module.exports = function($routeProvider, $locationProvider, $httpProvider) {
 	    templateUrl : 'pages/search.html',
 	    controller  : 'searchController'
 	})
+	.when('/search/:query', {
+	    templateUrl : 'pages/search.html',
+	    controller  : 'searchController'
+	})
 	.when('/admin', {
 	    templateUrl : 'pages/admin.html',
 	    controller  : 'adminController'

@@ -1,26 +1,31 @@
 module.exports = function($http) {
     let baseUrl = 'http://localhost:1337/api'
     this.getAllCars = function() {
-        return $http({
-            method: 'GET',
-            url: baseUrl + '/cars',
-            dataType: 'json'
-        });
+        return $http.get(baseUrl + '/cars');
     };
 
     this.getMostPopularCars = function() {
-        return $http({
-            method: 'GET',
-            url: baseUrl + '/cars/mostPopular/25',
-            dataType: 'json'
-        });
+        return $http.get(baseUrl + '/cars/mostPopular/25');
     };
 
     this.getCarById = function(carId) {
-        return $http({
-            method: 'GET',
-            url: baseUrl + '/cars/' + carId,
-            dataType: 'json'
-        });
+        return $http.get(baseUrl + '/cars/' + carId);
+    };
+
+    this.getManufacturers = function() {
+        return $http.get(baseUrl + '/manufacturers');
+    };
+
+    this.getModels = function(manufacturer) {
+        return $http.get(baseUrl + '/models/' + manufacturer);
+    };
+
+    this.search = function(string, dataObj) {
+        var options = {headers: {'Content-Type': 'application/json'}};
+        if (typeof(string) == 'undefined') {
+            return $http.post(baseUrl + '/search', dataObj, options);
+        } else {
+            return $http.post(baseUrl + '/search/' + string, dataObj, options);
+        }
     };
 };
