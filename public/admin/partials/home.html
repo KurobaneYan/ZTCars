@@ -1,59 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <div ng-show="noCars" class="alert alert-danger">
-                0 cars found.
-            </div>
-            <div ng-repeat="car in cars" class="row" ng-mouseenter="options=true" ng-mouseleave="options=false">
-                <div class="col-md-4">
-                    <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
-                        <img class="img-responsive img-rounded" ng-src="{{ car.photos[0] }}">
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <h4>
-                        <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
-                            {{ car.manufacturer }} {{ car.model }}
-                        </a>
-                    </h4>
-                    <p>
-                        carId: {{ car.carId }}
-                    </p>
-                    <p>
-                        {{ car.price * 1.89 }} BYN ({{ car.price }} USD or {{ car.price * 0.9 }} EUR)
-                    </p>
-                    <p>
-                        Year {{ car.year }}
-                    </p>
-                    </p>
-                        Fuel type: {{ car.fuelType }}
-                    <p>
-                    <p ng-hide="car.automaticTransmission">
-                        Mechanical transmission
-                    </p>
-                    <p ng-show="car.automaticTransmission">
-                        Automatic transmission
-                    </p>
-                    <p>
-                        Kilometrage: {{ car.kilometrage * 1000 }} km
-                    </p>
-                    <p ng-show="car.description">
-                        Description: {{ car.description }}
-                    </p>
-                </div>
-                <div class="col-md-2">
-                    <div ng-show="options">
-                    <p>
-                        <a class="btn btn-default">Edit</a>
-                    </p>
-                    <p>
-                        <a class="btn btn-danger">Delete</a>
-                    </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+         <div class="col-md-2">
             <form name="searchForm">
                 <div class="form-group">
                     <label>Search query</label>
@@ -102,6 +49,94 @@
                 <button class="btn btn-primary" ng-click="search()">Search</button>
                 <button class="btn btn-default" ng-click="resetSearchForm()">Reset</button>
             </form>
+        </div>
+        <div class="col-md-10">
+            <div ng-show="noCars" class="alert alert-danger">
+                0 cars found.
+            </div>
+            <table class="table table-bordered">
+                <th>
+                    Car Id
+                </th>
+                <th>
+                    Manufacturer
+                </th>
+                <th>
+                    Model
+                </th>
+                <th>
+                    Year
+                </th>
+                <th>
+                    Views
+                </th>
+                <th>
+                    Kilometrage
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Fuel Type
+                </th>
+                <th>
+                    Automatic Transmission
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Photo
+                </th>
+
+                <tr ng-repeat="car in cars" ng-mouseenter="options=true" ng-mouseleave="options=false">
+                    <td>
+                        {{ car.carId }}
+                    </td>
+                    <td>
+                        {{ car.manufacturer }}
+                    </td>
+                    <td>
+                        {{ car.model }}
+                    </td>
+                    <td>
+                        {{ car.year }}
+                    </td>
+                    <td>
+                        {{ car.views }}
+                    </td>
+                    <td>
+                        {{ car.kilometrage * 1000 }} km
+                    </td>
+                    <td>
+                        {{ car.price }} USD
+                    </td>
+                    <td>
+                        {{ car.fuelType }}
+                    </td>
+                    <td>
+                        {{ car.automaticTransmission }}
+                    </td>
+                    <td>
+                        {{ car.description }}
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <img class="img-responsive img-rounded" ng-src="{{ car.photos[0] }}">
+                            </div>
+                            <div class="col-md-2" ng-show="options">
+                                <p>
+                                    <a ng-href="http://localhost:1337/admin/#/edit/{{car.carId}}" class="btn btn-default">Edit</a>
+                                </p>
+                                <p>
+                                    <a ng-click="deleteCar(car.carId)" class="btn btn-danger">Delete</a>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

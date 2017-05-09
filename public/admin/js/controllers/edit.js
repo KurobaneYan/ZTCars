@@ -1,16 +1,8 @@
-module.exports = function($scope, service) {
+module.exports = function($scope, $routeParams, service) {
     var minYear = 1996;
     var currentYear = new Date().getFullYear();
 
-    $scope.car = {
-        price: 10000,
-        year: 2017,
-        kilometrage: 100,
-        views: 0,
-        automaticTransmission: 'false',
-        fuelType: 'Gasoline',
-        description: 'New Car'
-    };
+    $scope.car = {};
     $scope.car.photos = [];
     $scope.photos = [];
     $scope.carsTree = [ 
@@ -19,9 +11,6 @@ module.exports = function($scope, service) {
             {manufacturer:'BMW', models:['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7']},
             {manufacturer:'Nissan', models:['Note', 'Juke', 'Navara', 'Primera', 'Titan']}
     ];
-
-    $scope.manufacturer = $scope.carsTree[0];
-    $scope.model = $scope.manufacturer.models[0];
 
     $scope.years = [];
     while(currentYear >= minYear) {
@@ -33,9 +22,35 @@ module.exports = function($scope, service) {
     $scope.transmissions = ['true', 'false'];
     $scope.fuelTypes = ['Disel', 'Gasoline'];
 
-    $scope.onManufacturerChange = function() {
-        $scope.model = $scope.manufacturer.models[0];
-    };
+    var carId = parseInt($routeParams.carId, 10);
+
+    if (isNaN(carId)) {
+        $scope.error = 'CarId is not a number, carId value: ' + $routeParams.carId;
+    } else {
+        service.getCar($routeParams.carId)
+            .then(function(resp) {
+                $scope.car = resp.data;
+                $scope.carsTree.forEach(function(car) {
+                    if (car.manufacturer === $scope.car.manufacturer) {
+                        $scope.manufacturer = car;
+                    }
+                });
+                $scope.manufacturer.models.forEach(function(model) {
+                    if (model === $scope.car.model) {
+                        $scope.model = model;
+                    }
+                });
+
+                $scope.car.automaticTransmission = $scope.car.automaticTransmission.toString();
+            }, function(error) {
+                alert($scope.error);
+            
+            })
+
+        $scope.onManufacturerChange = function() {
+            $scope.model = $scope.manufacturer.models[0];
+        };
+    }
 
     $scope.create = function() {
         if ($scope.createForm.$valid) {
@@ -43,16 +58,15 @@ module.exports = function($scope, service) {
             $scope.car.model = $scope.model;
 
             if ($scope.car.photos.length > 0) {
-                service.createCar(JSON.stringify($scope.car))
-                    .then(function(res) {
-                        alert('Car created, carId ' + res.data.carId);
+                service.updateCar($scope.car.carId, JSON.stringify($scope.car))
+                    .then(function(resp) {
+                        alert('Car updated');
                     });
             } else {
                 alert('please, add at least one photo');
             }
         }
     };
-    $scope.car.photos = [];
 
     $scope.imageUpload = function(event){
          var files = event.target.files; 

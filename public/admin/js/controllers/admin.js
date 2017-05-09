@@ -1,4 +1,4 @@
-module.exports = function($scope, $rootScope, $location, $routeParams, service) {
+module.exports = function($scope, $route, $location, $routeParams, service) {
     var defaultManufacturer = 'select manufacturer';
     var defaultModel = 'select model';
     var defaultYear = 'select year';
@@ -165,9 +165,16 @@ module.exports = function($scope, $rootScope, $location, $routeParams, service) 
     $scope.resetSearchForm = function() {
         $location.path('/');
         $location.search({});
+        $route.reload();
     };
 
-    $scope.create = function() {
-        $location.path('/create');
+    $scope.deleteCar = function(carId) {
+        if (confirm('Delete car with id ' + carId + '?')) {
+            service.deleteCar(carId)
+                .then(function(resp) {
+                    alert('deleted');
+                    $route.reload();
+                });
+        }
     };
 };
