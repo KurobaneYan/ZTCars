@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="ZTCars">
+<head>
+    <meta charset="UTF-8">
+    <title>ZTCars</title>
+    <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../dist/vendor.js"></script>
+    <script src="../libs/ng-flow/dist/ng-flow-standalone.min.js"></script>
+    <script src="../dist/adminApp.js"></script>
+</head>
+<body ng-controller="adminController">
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-href="/admin">ZTCars admin</a>
+            </div>
+
+            <div class="navbar-form navbar-right">
+                <a class="btn btn-default" ng-click="create()">Add new car</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div ng-view>
+</div>
+
+</body>
+
+</html>

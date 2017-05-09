@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div ng-show="noCars" class="alert alert-danger">
+                0 cars found.
+            </div>
+            <div ng-repeat="car in cars" class="row" ng-mouseenter="options=true" ng-mouseleave="options=false">
+                <div class="col-md-4">
+                    <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
+                        <img class="img-responsive img-rounded" ng-src="{{ car.photos[0] }}">
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <h4>
+                        <a ng-href="http://localhost:1337/#/car/{{ car.carId }}">
+                            {{ car.manufacturer }} {{ car.model }}
+                        </a>
+                    </h4>
+                    <p>
+                        carId: {{ car.carId }}
+                    </p>
+                    <p>
+                        {{ car.price * 1.89 }} BYN ({{ car.price }} USD or {{ car.price * 0.9 }} EUR)
+                    </p>
+                    <p>
+                        Year {{ car.year }}
+                    </p>
+                    </p>
+                        Fuel type: {{ car.fuelType }}
+                    <p>
+                    <p ng-hide="car.automaticTransmission">
+                        Mechanical transmission
+                    </p>
+                    <p ng-show="car.automaticTransmission">
+                        Automatic transmission
+                    </p>
+                    <p>
+                        Kilometrage: {{ car.kilometrage * 1000 }} km
+                    </p>
+                    <p ng-show="car.description">
+                        Description: {{ car.description }}
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <div ng-show="options">
+                    <p>
+                        <a class="btn btn-default">Edit</a>
+                    </p>
+                    <p>
+                        <a class="btn btn-danger">Delete</a>
+                    </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <form name="searchForm">
+                <div class="form-group">
+                    <label>Search query</label>
+                    <input type="text" class="form-control" ng-model="searchQuery">
+                </div>
+                <div class="from-group">
+                    <label for="manufacturer">Manufacturer</label>
+                    <select class="form-control" ng-model="manufacturer" ng-options="m.manufacturer for m in carsTree" ng-change="onManufacturerChange()"></select>
+                </div>
+                <div class="from-group">
+                    <label for="model">Model</label>
+                    <select class="form-control" ng-model="model" ng-options="m for m in manufacturer.models"></select>
+                </div>
+                <div class="form-group">
+                    <label for="priceMin">Min price</label>
+                    <input type="number" min="0" max="1000000" id="priceMin" ng-model="filter.priceMin" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                    <label for="priceMax">Max price</label>
+                    <input type="number" min="1" max="1000000" id="priceMax" ng-model="filter.priceMax" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                    <label for="yearMin">Min year</label>
+                    <select id="yearMin" ng-model="yearMin" ng-options="y for y in yearsMin" class="form-control" ng-change="onYearMinChange()"></select>
+                </div>
+                <div class="form-group">
+                    <label for="yearMax">Max year</label>
+                    <Select id="yearMax" ng-model="yearMax" ng-options="y for y in yearsMax" class="form-control" ng-change="onYearMaxChange()"></select>
+                </div>
+                <div class="form-group">
+                    <label for="kilometrageMin">Min kilometrage</label>
+                    <input type="number" min="0" max="1000" id="kilometrageMin" ng-model="filter.kilometrageMin" class="form-control"></input>
+                </div>
+                <div class="form-group">
+                    <label for="kilometrageMax">Max kilometrage</label>
+                    <input type="number" min="0" max="1000" id="kilometrageMax" ng-model="filter.kilometrageMax" class="form-control"></input>
+                </div>
+                <div class="from-group">
+                    <label for="fuelType">Fuel Type</label>
+                    <select class="form-control" ng-model="fuelType" ng-options="f for f in fuelTypes"></select>
+                </div>
+                <div class="form-group">
+                    <label for="transmission">Automatic Transmission</label>
+                    <select id="transmission" ng-model="transmission" ng-options="t for t in transmissions" class="form-control" ng-change="onYearMinChange()"></select>
+                </div>
+                <button class="btn btn-primary" ng-click="search()">Search</button>
+                <button class="btn btn-default" ng-click="resetSearchForm()">Reset</button>
+            </form>
+        </div>
+    </div>
+</div>
