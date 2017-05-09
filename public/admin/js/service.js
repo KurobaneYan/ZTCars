@@ -3,19 +3,19 @@ module.exports = function($http) {
     var options = {headers: {'Content-Type': 'application/json'}};
 
     this.createCar = function(car) {
-        return $http.post(baseUrl + '/cars', car, options);
+        return $http.post(baseUrl + '/admin/cars', car, options);
     }; 
 
     this.getCar = function(carId) {
-        return $http.get(baseUrl + '/cars/' + carId, options);
+        return $http.get(baseUrl + '/admin/cars/' + carId, options);
     };
 
     this.updateCar = function(carId, car) {
-        return $http.put(baseUrl + '/cars/' + carId, car, options);
+        return $http.put(baseUrl + '/admin/cars/' + carId, car, options);
     };
 
     this.deleteCar = function(carId) {
-        return $http.delete(baseUrl + '/cars/' + carId, options);
+        return $http.delete(baseUrl + '/admin/cars/' + carId, options);
     };
 
     this.getManufacturers = function() {

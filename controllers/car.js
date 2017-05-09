@@ -14,7 +14,7 @@ exports.createCar = function(req, res) {
     show(req, res, car);
 };
 
-exports.getCarById = function(req, res) {
+exports.showCarById = function(req, res) {
     let carId = parseInt(req.params.carId, 10);
     let isValidCarId = validation.isPositiveInt(carId);
     if (isValidCarId) {
@@ -25,6 +25,18 @@ exports.getCarById = function(req, res) {
                 carFields.views += 1;
                 return db.updateCarById(carId, carFields);
             });
+        show(req, res, car);
+    } else {
+        res.status(400).json({error: 'invalid carId'});
+    }
+};
+
+exports.getCarById = function(req, res) {
+    let carId = parseInt(req.params.carId, 10);
+    let isValidCarId = validation.isPositiveInt(carId);
+    if (isValidCarId) {
+        let carFields = {};
+        let car = db.getById(carId);
         show(req, res, car);
     } else {
         res.status(400).json({error: 'invalid carId'});

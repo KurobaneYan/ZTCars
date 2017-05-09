@@ -7,8 +7,9 @@ It's a simple single page application with RESTful Web services. Backend: Node +
 ### Install all dependencies
 
 ```shell
-$ bower install && npm install
+$ npm install
 ```
+
 ### Initialize Database
 
 ```
@@ -21,8 +22,9 @@ This will create 106 car records in database.
 
 1. Install the dependencies 
 2. Run Mongo daemon with `mongod`
-2. Start the server with `npm start`
-3. Then check address [localhost:1337](http://localhost:1337)
+3. Start the server with `npm start`
+4. Then check address [localhost:1337](http://localhost:1337)
+5. Or address [localhost:1337/admin](http://localhost:1337/admin)
 
 ## REST
 
@@ -31,10 +33,11 @@ This will create 106 car records in database.
 | Route | HTTP Verb | Description |
 | ----- | ----- | ----- |
 | /api/cars | GET | Get all the cars |
-| /api/cars | POST | Create a car |
-| /api/cars/:carId | GET | Get a single car |
-| /api/cars/:carId | PUT | Update a car with a new info |
-| /api/cars/:carId | DELETE | Delete a car |
+| /api/cars/:carId | GET | Get a single car with incrementing views |
+| /api/admin/cars | POST | Create a car |
+| /api/admin/cars/:carId | GET | Get a single car |
+| /api/admin/cars/:carId | PUT | Update a car with a new info |
+| /api/admin/cars/:carId | DELETE | Delete a car |
 | /api/cars/mostPopular/:amount | GET | Get the most popular cars |
 | /api/manufacturers | GET | Get list on a manufacturers |
 | /api/models/:manufacturer | GET | Get all car models for a manufacturer |
@@ -65,6 +68,7 @@ When creating or updating car send a car fields in body, using JSON format:
     "price": 70000,
     "year": 2017,
     "views": 13,
+    "automaticTransmission": false,
     "photos": [
       "photo1",
       "photo2",
@@ -81,6 +85,7 @@ A filter object example:
     "model": "Lancer",
     "yearMin": 1998,
     "yearMax": 2016,
+    "automaticTransmission": false,
     "priceMin": 10000,
     "priceMax": 40000,
     "kilometrageMin": 100,

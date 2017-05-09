@@ -3,6 +3,14 @@ let carController = require('../controllers/car');
 
 let router = express.Router();
 
+router.route('/admin/cars')
+    .post(carController.createCar);
+
+router.route('/admin/cars/:carId')
+    .get(carController.getCarById)
+    .put(carController.updateCarById)
+    .delete(carController.deleteCarById);
+
 router.route('/search')
     .post(carController.search);
 
@@ -11,8 +19,7 @@ router.route('/search/:string')
     .post(carController.search);
 
 router.route('/cars')
-    .get(carController.getAllCars)
-    .post(carController.createCar);
+    .get(carController.getAllCars);
 
 router.route('/cars/mostPopular/:amount')
     .get(carController.getMostPopular);
@@ -24,8 +31,6 @@ router.route('/models/:manufacturer')
     .get(carController.getModels);
 
 router.route('/cars/:carId')
-    .get(carController.getCarById)
-    .put(carController.updateCarById)
-    .delete(carController.deleteCarById);
+    .get(carController.showCarById);
 
 module.exports = router;

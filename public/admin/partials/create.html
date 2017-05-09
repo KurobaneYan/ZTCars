@@ -1,59 +1,59 @@
 <div class="container">
-    <div class="row">
-        <form name="createForm">
-            <div class="from-group">
-                <label for="manufacturer">Manufacturer</label>
-                <select class="form-control" ng-model="manufacturer" ng-options="m.manufacturer for m in carsTree" ng-change="onManufacturerChange()"></select>
-            </div>
-            <div class="from-group">
-                <label for="model">Model</label>
-                <select class="form-control" ng-model="model" ng-options="m for m in manufacturer.models"></select>
-            </div>
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" min="1" max="1000000" id="price" ng-model="car.price" class="form-control" required></input>
-            </div>
-            <div class="form-group">
-                <label for="year">Year</label>
-                <select id="year" ng-model="car.year" ng-options="y for y in years" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label for="kilometrage">Kilometrage</label>
-                <input type="number" min="0" max="1000" id="kilometrage" ng-model="car.kilometrage" class="form-control" required></input>
-            </div>
-            <div class="from-group">
-                <label for="fuelType">Fuel Type</label>
-                <select class="form-control" ng-model="car.fuelType" ng-options="f for f in fuelTypes"></select>
-            </div>
-            <div class="form-group">
-                <label for="transmission">Automatic Transmission</label>
-                <select id="transmission" ng-model="car.automaticTransmission" ng-options="t for t in transmissions" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label for="views">Views</label>
-                <input type="number" min="0" max="1000000" id="views" ng-model="car.views" class="form-control" required></input>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : createForm.description.$invalid}">
-                <label for="desciption">
-                    Disciption
-                </label>
-                <textarea ng-model="car.description" class="form-control" name="description" rows="5" id="description" required></textarea>
-                <p ng-show="createForm.description.$error.required" class="help-block">Please enter a car description</p>
-            </div>
-
-            <button class="btn btn-success" ng-click="create()">Create</button>
-            <button class="btn btn-default" ng-click="popPhoto()">Remove last photo</button>
-            <button class="btn btn-default" ng-click="clearPhotos()">Remove all photos</button>
-            <label class="btn btn-default btn-file">
-                Add photos 
-                <input style="display: none;" type="file" ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+    <h3>
+        Add new car
+    </h3>
+    <form name="createForm">
+        <div class="from-group">
+            <label for="manufacturer">Manufacturer</label>
+            <select class="form-control" ng-model="manufacturer" ng-options="m.manufacturer for m in carsTree" ng-change="onManufacturerChange()"></select>
+        </div>
+        <div class="from-group">
+            <label for="model">Model</label>
+            <select class="form-control" ng-model="model" ng-options="m for m in manufacturer.models"></select>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" min="1" max="1000000" id="price" ng-model="car.price" class="form-control" required></input>
+        </div>
+        <div class="form-group">
+            <label for="year">Year</label>
+            <select id="year" ng-model="car.year" ng-options="y for y in years" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="kilometrage">Kilometrage</label>
+            <input type="number" min="0" max="1000" id="kilometrage" ng-model="car.kilometrage" class="form-control" required></input>
+        </div>
+        <div class="from-group">
+            <label for="fuelType">Fuel Type</label>
+            <select class="form-control" ng-model="car.fuelType" ng-options="f for f in fuelTypes"></select>
+        </div>
+        <div class="form-group">
+            <label for="transmission">Automatic Transmission</label>
+            <select id="transmission" ng-model="car.automaticTransmission" ng-options="t for t in transmissions" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label for="views">Views</label>
+            <input type="number" min="0" max="1000000" id="views" ng-model="car.views" class="form-control" required></input>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : createForm.description.$invalid}">
+            <label for="desciption">
+                Disciption
             </label>
-        </form>
-
-        <div ng-repeat="photo in car.photos">
-            <img class="img-responsive" ng-src="{{photo}}" />
+            <textarea ng-model="car.description" class="form-control" name="description" rows="5" id="description" required></textarea>
+            <p ng-show="createForm.description.$error.required" class="help-block">Please enter a car description</p>
         </div>
 
+        <a ng-href="/admin/#" class="btn btn-default">Cancel</a>
+        <button class="btn btn-success" ng-click="create()">Add</button>
+        <button class="btn btn-default" ng-click="popPhoto()">Remove last photo</button>
+        <button class="btn btn-default" ng-click="clearPhotos()">Remove all photos</button>
+        <label class="btn btn-default btn-file">
+            Add photos 
+            <input style="display: none;" type="file" ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" multiple />
+        </label>
+    </form>
 
+    <div ng-repeat="photo in car.photos">
+        <img class="img-responsive" ng-src="{{photo}}" />
     </div>
 </div>

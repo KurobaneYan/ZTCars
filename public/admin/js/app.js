@@ -6,7 +6,7 @@ var adminController = require('./controllers/admin');
 var createController = require('./controllers/create');
 var editController = require('./controllers/edit');
 
-var app = angular.module('ZTCars', ['ngRoute', 'flow']);
+var app = angular.module('ZTCars', ['ngRoute']);
 app.config(config);
 
 app.service('service', service); 

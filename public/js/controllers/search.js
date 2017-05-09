@@ -1,4 +1,4 @@
-module.exports = function($scope, $rootScope, $location, $routeParams, service) {
+module.exports = function($scope, $rootScope, $location, $route, $routeParams, service) {
     var defaultManufacturer = 'select manufacturer';
     var defaultModel = 'select model';
     var defaultYear = 'select year';
@@ -164,5 +164,6 @@ module.exports = function($scope, $rootScope, $location, $routeParams, service) 
     $scope.resetSearchForm = function() {
         $location.path('/search');
         $location.search({});
+        $route.reload();
     };
 };

@@ -4,7 +4,6 @@ module.exports = function($scope, $routeParams, service) {
 
     $scope.car = {};
     $scope.car.photos = [];
-    $scope.photos = [];
     $scope.carsTree = [ 
         {manufacturer:'Mitsubishi', models:['Lancer', 'Lancer Sportback', 'Outlander', 'Triton', 'Pajero', 'Attrage']},
         {manufacturer:'Volvo', models:['S60', 'S70', 'S80', 'S90', 'XC60', 'XC70', 'XC90']},
