@@ -24,33 +24,42 @@ let carsData = {
 
 let fuel = ['Gasoline', 'Disel'];
 
-let counter = Counter({_id: 'carId', seq: 0});
-console.log(counter);
-Counter.update({_id: 'carId'}, counter, {upsert: true, setDefaultsOnInsert: true}, function(err){});
+Counter.remove({})
+    .then(() => {
+        let counter = Counter({_id: 'carId', seq: 0});
+        return counter.save();
+    })
+    .then(() => Car.remove({}))
+    .then(() => addCars())
+    .then(cars => {
+        console.log('Done');
+        process.exit();
+    })
+    .catch(error => console.log('error', error));
 
-for (let make in carsData) {
-    let models = carsData[make];
-    for (let i = 0; i < 30; i++) {
-        let tmpMode = getRandomInt(0, models.length);
-        let tmpBool = Math.random() >= 0.5;
-        let tmpFuel = Math.round(Math.random());
-        let tempCar = new Car({
-            views: getRandomInt(0, 1000),
-            year: getRandomInt(1996, 2017),
-            price: getRandomInt(3, 1000) * 100,
-            kilometrage: getRandomInt(10, 500),
-            manufacturer: make,
-            model: models[tmpMode],
-            fuelType: fuel[tmpFuel],
-            automaticTransmission: tmpBool,
-            photos: imgs
-        });
-        tempCar.save(function(err) {
-            if (err) {
-                console.log(err);
-            }
-        });
+function addCars() {
+    let promises = [];
+    for (let make in carsData) {
+        let models = carsData[make];
+        for (let i = 0; i < 30; i++) {
+            let tmpMode = getRandomInt(0, models.length);
+            let tmpBool = Math.random() >= 0.5;
+            let tmpFuel = Math.round(Math.random());
+            let tempCar = new Car({
+                views: getRandomInt(0, 1000),
+                year: getRandomInt(1996, 2017),
+                price: getRandomInt(3, 1000) * 100,
+                kilometrage: getRandomInt(10, 500),
+                manufacturer: make,
+                model: models[tmpMode],
+                fuelType: fuel[tmpFuel],
+                automaticTransmission: tmpBool,
+                photos: imgs
+            });
+            promises.push(tempCar.save());
+        }
     }
+    return Promise.all(promises);
 }
 
 function getRandomInt(min, max) {
